@@ -1,4 +1,4 @@
-# Vehicle-Rental-System
+# Vehicle-Rental-System (CS254-Project)
 
 ## Members:
 - Alan Tony (191CS207)
