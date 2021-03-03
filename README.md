@@ -1,4 +1,4 @@
-# VehicleRentalSystem
+# Vehicle-Rental-System
 
 ## Members:
 - Alan Tony (191CS207)
