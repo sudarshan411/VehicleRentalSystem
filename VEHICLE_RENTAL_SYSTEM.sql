@@ -6,7 +6,7 @@ create table Vehicle_DB(
  v_type varchar(50),
  model varchar(50),
  model_year int,
- license int NOT NULL,
+ license varchar(14) NOT NULL,
  rate float,
  
 PRIMARY KEY (v_id)
