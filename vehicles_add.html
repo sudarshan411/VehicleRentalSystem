@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="cars.css">
+    <title>Add Cars</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">VRS</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navLinks">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="" class="nav-link">CATALOG</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">LOG-IN</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>A New Addition</h1>
+        <form>
+            <div class="form-group">
+                    <label for="vehi-type">Vehicle Type</label>
+                    <input type="text" id="vehi-type" class="form-control" aria-describedby="help1">
+                    <small id="help1" class="form-text text-muted">Vehicle type (car, motorcycle etc.)</small> 
+            </div>
+            <div class="row ">
+                <div class="col-6 form-group">
+                    <label for="vehi-model">Model Name</label>
+                    <input type="text" id="vehi-model" class="form-control" aria-describedby="help2">
+                    <small id="help2" class="form-text text-muted">Vehicle model (Swift, Honda City etc.)</small> 
+                </div>
+                <div class="col-6 form-group">
+                    <label for="vehi-type">Model Year</label>
+                    <input type="number" min="1900" max="2200" step="1" id="vehi-year" class="form-control" aria-describedby="help3">
+                    <small id="help3" class="form-text text-muted">Model year</small> 
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="vehi-rate">Rate (per day)</label>
+                <input type="number" id="vehi-rate" class="form-control" aria-describedby="help4">
+                <small id="help4" class="form-text text-muted">Rate for the vehicle</small> 
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $("#mainNavbar");
+                $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+            });
+        });
+    </script>
+</body>
+</html>
