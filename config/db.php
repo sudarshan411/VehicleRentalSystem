@@ -1,19 +1,11 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "Alan@DBMS1";
-$db = "onlineshop";
-
 // Create connection
-$con = mysqli_connect($servername, $username, $password,$db);
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 // Check connection
-if (!$con) {
+if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
-}
-else {
-    echo 'MySQLi Connection successful';
 }
 
 ?>
