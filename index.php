@@ -16,9 +16,7 @@
     <title>Home Page</title>
 </head>
 <body>
-    <a href= "<?php echo ROOT_URL ?>/booking.php">Rent a vehicle</a>
     <br>
-    <a href= "<?php echo ROOT_URL ?>/add_vehicles.php">Add a vehicle</a>
-    
+    <a href= "<?php echo ROOT_URL ?>/add_vehicles.php">Add a vehicle</a>    
 </body>
 </html>
