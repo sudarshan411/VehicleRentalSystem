@@ -5,8 +5,10 @@
 - Lakshmi Aashish Prateek Janaswamy (191CS225)
 - Sudarshan Sundarrajan (191CS255)
     
-## To-Do LIST
- - [ ] Basic HTML structure and database schema
+## To-Do LIST (subject to changes)
+ - [X] Basic HTML structure and database schema
+ - [ ] Vehicle Input from Site and Updating Database accordingly
+ - [ ] Getting ready with the forms for input and log-in
     
 ## Schema
 - Vehicles:
