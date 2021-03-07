@@ -35,4 +35,9 @@
   - Return_Date
   - Amount
 
-(--Work in Progresss--)
+## Deadlines
+ - 10th March \- First Project Review
+ - 1st April \- (most probably) Final Review
+
+
+(--Work in Progress--)
