@@ -49,7 +49,3 @@ USE VehicleRentalManagement;
 	 foreign key (u_id) references Users(u_id) on delete cascade 
 	 on update cascade
  );
- 
- 
-
- 

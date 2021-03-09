@@ -2,80 +2,108 @@
 require('config/def.php');
 require('config/db.php');
 
-    //Calculate smallest free index for new entry
-    $query = 'SELECT v_id FROM Vehicles';
-    $results = mysqli_query($conn, $query);
-    echo mysqli_error($conn).'<br>';
-    $existing_indices = mysqli_fetch_array($results, MYSQLI_ASSOC);
+    $duplicate = false;
 
-    print_r($existing_indices);
+    if(isset($_POST['submit'])){
 
-    // Check For Submit
-	/*if(filter_has_var(INPUT_POST, 'submit')){
-		// Get form data
-		$v_type = $_POST['v_type'];
-		$model = $_POST['model'];
+        $v_type = mysqli_real_escape_string($conn, $_POST['v_type']);
+        $model = mysqli_real_escape_string($conn, $_POST['model']);
         $model_year = $_POST['model_year'];
-        $license = $_POST['license'];
         $rate = $_POST['rate'];
-        $available = $_POST['available'];
 
-        //Calculate smallest free index for new entry
-        $query = 'SELECT v_id FROM Vehicles';
-        $result = mysqli_query($conn, $query);
-        $existing_indices = mysqli_fetch_array($result, MYSQLI_NUM);
+        $result = $conn->prepare("SELECT m_id FROM Model");
+        $result->execute();
+        $mid_array = [];
+        foreach ($result->get_result() as $row)
+        {
+            $mid_array[] = $row['m_id'];
+        }
+        sort($mid_array);
 
-                
-	}*/
+        $j = 1;
+        foreach ($mid_array as $i) {
+            if($j != $i){
+                break;
+            }
+            $j++;
+        }
+        $m_id = $j;
 
-    //Close SQL connection
+        $cap_v_type = strtoupper($v_type);
+        $cap_model = strtoupper($model);
 
+        //Checking for already inserted model with same info
+        $result = $conn->prepare("SELECT * FROM Model WHERE UPPER(v_type) = '$cap_v_type' AND UPPER(model) = '$cap_model' AND model_year = '$model_year'");
+        $result->execute();
+        $tuples = $result->get_result()->fetch_all();
+
+        $duplicate = count($tuples) > 0;
+
+        if(!$duplicate){
+
+            $result = $conn->prepare("INSERT INTO Model VALUES('$m_id', '$v_type', '$model', '$model_year', '$rate')");
+            if($result->execute()){
+                header('Location: '.ROOT_URL.'');
+            }        
+            else{
+                echo '<br>MySQLi error: '.mysqli_error($conn);
+            }
+        }
+
+    }  
+
+    //Close sql connection
+    mysqli_close($conn);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Vehicles</title> 
-</head>
-<body>
-    <div>
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <div>
-                <label>Vehicle Type</label>
-                <select name="v_type">
-                    <option value="car">Car</option>
-                    <option value="2-wheeler">2-wheeler</option>
-                </select>
-            </div>
+<?php include('inc/header.php');?>
 
-            <div>
-                <label>Model Name</label>
-                <input type="text" name="model">
-            </div>
+<?php $_POST['submit'] = null;?>
 
-            <div>
-                <label>Model Year</label>
-                <input type="number" name="model_year" step="1">
+    <div class="container">
+        <h1>A New Addition</h1>
+        <?php if($duplicate): ?>
+    		<div class="alert <?php echo 'alert-danger'; ?>"><?php echo 'Model already exists! Enter a new model'; ?></div>
+    	<?php endif; ?>
+        <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+            <div class="form-group">
+                    <label for="vehi-type">Vehicle Type</label>
+                    <input type="text" name="v_type" id="vehi-type" class="form-control" aria-describedby="help1">
+                    <small id="help1" class="form-text text-muted">Vehicle type (car, motorcycle etc.)</small> 
             </div>
-
-            <div>
-                <label>License</label>
-                <input type="text" name="license">
+            <div class="row ">
+                <div class="col-6 form-group">
+                    <label for="vehi-model">Model Name</label>
+                    <input type="text" name="model" id="vehi-model" class="form-control" aria-describedby="help2">
+                    <small id="help2" class="form-text text-muted">Vehicle model (Swift, Honda City etc.)</small> 
+                </div>
+                <div class="col-6 form-group">
+                    <label for="vehi-year">Model Year</label>
+                    <input type="number" name="model_year" min="1900" max="2200" step="1" id="vehi-year" class="form-control" aria-describedby="help3">
+                    <small id="help3" class="form-text text-muted">Model year</small> 
+                </div>
             </div>
-
-            <div>
-                <label>Rental Rate</label>
-                <input type="number" name="rate" step="0.01">
+            <div class="form-group">
+                <label for="vehi-rate">Rate (per day)</label>
+                <input type="number" step= "0.01" min="0" name="rate" id="vehi-rate" class="form-control" aria-describedby="help4">
+                <small id="help4" class="form-text text-muted">Rate for the vehicle</small> 
             </div>
-
             <div>
-                <button type="submit" name="submit">
+                <input type = "submit" name="submit" class="btn btn-primary" value="submit">
             </div>
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $("#mainNavbar");
+                $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+            });
+        });
+    </script>
 </body>
 </html>
 

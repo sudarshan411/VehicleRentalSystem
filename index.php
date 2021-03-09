@@ -2,6 +2,8 @@
 
     require('config/def.php');
     require('config/db.php');
+    
+    include('inc/header.php');
 
     //Close connection
     mysqli_close($conn);
