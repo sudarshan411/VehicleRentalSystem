@@ -8,7 +8,12 @@
 ## To-Do LIST (subject to changes)
  - [X] Basic HTML structure and database schema
  - [X] Vehicle Input from Site and Updating Database accordingly
- - [ ] Getting ready with the forms for input and log-in
+ - [ ] User and admin dashboards
+ - [ ] Edit/Add Model & Units
+ - [ ] Home Page
+ - [ ] Model Specific Page
+ - [ ] Vehicle Catalog Page
+ - [ ] Bookings
     
 ## Schema
 - Vehicles:
