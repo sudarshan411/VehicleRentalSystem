@@ -19,6 +19,9 @@
 </head>
 <body>
     <br>
-    <a href= "<?php echo ROOT_URL ?>/add_vehicles.php">Add a vehicle</a>    
+    <div class="container">
+        <h1>Welcome to the Vehicle Rental System</h1>
+        <a href= "<?php echo ROOT_URL ?>/add_vehicles.php" class="btn btn-primary">Add a vehicle</a>
+    </div>
 </body>
 </html>

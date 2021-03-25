@@ -11,6 +11,20 @@ require('config/db.php');
         $model_year = $_POST['model_year'];
         $rate = $_POST['rate'];
 
+        $error = array();
+        if(empty($v_type) || $v_type == " "){
+            $error[] = 'You forgot to enter the vehicle type!';
+        }
+        if(empty($model) || $model == " "){
+            $error[] = 'You forgot to specify the model!';
+        }
+        if(empty($model_year)){
+            $error[] = 'You forgot to specify the model year!';
+        }
+        if(empty($rate)){
+            $error[] = 'You forgot to specify the rate!';
+        }
+
         $result = $conn->prepare("SELECT m_id FROM Model");
         $result->execute();
         $mid_array = [];
@@ -39,7 +53,7 @@ require('config/db.php');
 
         $duplicate = count($tuples) > 0;
 
-        if(!$duplicate){
+        if(!$duplicate && empty($error)){
 
             $result = $conn->prepare("INSERT INTO Model VALUES('$m_id', '$v_type', '$model', '$model_year', '$rate')");
             if($result->execute()){
@@ -64,6 +78,9 @@ require('config/db.php');
         <h1>A New Addition</h1>
         <?php if($duplicate): ?>
     		<div class="alert <?php echo 'alert-danger'; ?>"><?php echo 'Model already exists! Enter a new model'; ?></div>
+    	<?php endif; ?>
+        <?php if(!empty($error)): ?>
+    		<div class="alert <?php echo 'alert-danger'; ?>"><?php echo 'You have not filled one or more field(s)! Please fill each field!'; ?></div>
     	<?php endif; ?>
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
             <div class="form-group">
