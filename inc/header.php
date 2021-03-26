@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">VRS</a>
+        <a class="navbar-brand" href="<?php echo ROOT_URL ?>">VRS</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,7 +23,7 @@
                     <a href="" class="nav-link">ABOUT US</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">LOG-IN</a>
+                <li><a href="" class="nav-link" data-target="#loginModal" data-toggle="modal">LOG IN</a></li>
                 </li>
             </ul>
         </div>

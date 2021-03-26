@@ -25,10 +25,10 @@ require('config/db.php');
             $error[] = 'You forgot to specify the rate!';
         }
 
-        $result = $conn->prepare("SELECT m_id FROM Model");
-        $result->execute();
+        $stmt = $conn->prepare("SELECT m_id FROM Model");
+        $stmt->execute();
         $mid_array = [];
-        foreach ($result->get_result() as $row)
+        foreach ($stmt->get_result() as $row)
         {
             $mid_array[] = $row['m_id'];
         }
@@ -47,16 +47,16 @@ require('config/db.php');
         $cap_model = strtoupper($model);
 
         //Checking for already inserted model with same info
-        $result = $conn->prepare("SELECT * FROM Model WHERE UPPER(v_type) = '$cap_v_type' AND UPPER(model) = '$cap_model' AND model_year = '$model_year'");
-        $result->execute();
-        $tuples = $result->get_result()->fetch_all();
+        $stmt = $conn->prepare("SELECT * FROM Model WHERE UPPER(v_type) = '$cap_v_type' AND UPPER(model) = '$cap_model' AND model_year = '$model_year'");
+        $stmt->execute();
+        $tuples = $stmt->get_result()->fetch_all();
 
         $duplicate = count($tuples) > 0;
 
         if(!$duplicate && empty($error)){
 
-            $result = $conn->prepare("INSERT INTO Model VALUES('$m_id', '$v_type', '$model', '$model_year', '$rate')");
-            if($result->execute()){
+            $stmt = $conn->prepare("INSERT INTO Model VALUES('$m_id', '$v_type', '$model', '$model_year', '$rate')");
+            if($stmt->execute()){
                 header('Location: '.ROOT_URL.'');
             }        
             else{

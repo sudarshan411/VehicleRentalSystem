@@ -10,7 +10,8 @@ USE VehicleRentalManagement;
 	 v_type varchar(50),
 	 model varchar(50),
 	 model_year int,
-	 rate float,
+     base double,
+	 rate double,
 	 primary key(m_id)
  );
  
@@ -21,6 +22,7 @@ USE VehicleRentalManagement;
 	 license VARCHAR(14) NOT NULL,
      m_id int not null,
      taken int not null,
+     state varchar(50),
      primary key(license),
      foreign key(m_id) references Model(m_id) on update cascade on delete cascade
  );
@@ -29,7 +31,8 @@ USE VehicleRentalManagement;
 	 u_id int NOT NULL,
 	 u_name varchar(50) not null,
 	 u_type varchar(50) not null,
-	 email varchar(50),
+	 email varchar(50) unique,
+     passw varchar(50),
 	 phone_number BIGINT,
 	 Address varchar(70),
 	 primary key (u_id)

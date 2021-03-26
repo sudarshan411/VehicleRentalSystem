@@ -4,4 +4,5 @@
     define('DB_USER', 'root');
     define('DB_PASS', 'Alan@DBMS1');
     define('DB_NAME', 'VehicleRentalManagement');
+    define('PORJECT_DIR', 'VehicleRentalSystem');
 ?>

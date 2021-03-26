@@ -13,12 +13,20 @@
         $_SESSION['previous_page'] = $_SERVER['HTTP_REFERER'];
     }
     
-    if(isset($_POST['submit'])){
+    /*if(isset($_POST['submit'])){
 
-        $login_fail = true;
+        
+        $login_fail = true;     //Flag to indicate incorrect login credentials
 
-        if()
+        //$email
+        //unset
+        
+        //$error = array();
+        if(empty($v_type) || $v_type == " "){
+            $error[] = 'You forgot to enter the vehicle type!';
+        }
     }
+    */
 ?>
 
 <!DOCTYPE html>
@@ -38,11 +46,11 @@
     
     <div class="text-center">
         <!-- Button HTML (to Trigger Modal) -->
-        <a href="#myModal" class="trigger-btn" data-toggle="modal">Click to Open Login Modal</a>
+        <a href="#loginModal" class="trigger-btn" data-toggle="modal">Click to Open Login Modal</a>
     </div>
 
     <!-- Modal HTML -->
-    <div id="myModal" class="modal fade">
+    <div id="loginModal" class="modal fade">
         <div class="modal-dialog modal-login">
             <div class="modal-content">
                 <form action="<?php echo ROOT_URL; ?>/dummy.php" method="post">
