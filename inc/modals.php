@@ -1,6 +1,3 @@
-
-
-<!-- Modal HTML -->
 <div id="loginModal" class="modal fade">
         <div class="modal-dialog modal-login">
             <div class="modal-content">
@@ -24,4 +21,4 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>

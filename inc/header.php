@@ -1,3 +1,9 @@
+<?php 
+
+require('config/session.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +29,11 @@
                     <a href="" class="nav-link">ABOUT US</a>
                 </li>
                 <li class="nav-item">
-                <li><a href="" class="nav-link" data-target="#loginModal" data-toggle="modal">LOG IN</a></li>
+                <?php if(!$_SESSION['login_state']) : ?>
+                    <li><a href="" class="nav-link" data-target="#loginModal" data-toggle="modal">LOG IN</a></li>
+                <?php else : ?>
+                    <li><a href="" class="nav-link" id="logout">LOG OUT</a></li>
+                <?php endif; ?>
                 </li>
             </ul>
         </div>
