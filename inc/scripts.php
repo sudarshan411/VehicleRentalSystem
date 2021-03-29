@@ -21,7 +21,7 @@
                         }  
                         else if(response == "Login success"){
 
-                            alert("Login success. Login state= "+<?php echo ($_SESSION['login_state'])?'true':'false';?> + ", Set post action = "+)<?php echo $_POST['action']; ?>;
+                            alert("Login success, Login state= "+"<?php echo $_SESSION['login_state']?'true':'false'; ?>");
                             $('#loginModal').hide();  
                             location.reload();  
                         }
@@ -46,10 +46,10 @@
                     url:"inc/log_service.php",  
                     method:"POST",  
                     data:{action:action},  
-                    success:function()  
+                    success:function(response)  
                     {
                         location.reload();
-                        alert("Login state= "+<?php echo ($_SESSION['login_state'])?'true':'false';?>);
+                        alert(response);
                     }  
             });  
         });  

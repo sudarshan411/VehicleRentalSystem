@@ -4,7 +4,7 @@
 
 require('../config/def.php');
 require('../config/db.php');
-//require('../config/session.php');
+session_start();
 
 //var_dump($_POST);
 
@@ -43,13 +43,16 @@ if(isset($_POST['email']))
      }
 
      unset($_POST['email']);     
-     unset($_POST["action"]);
+     //unset($_POST["action"]);
 }  
+
 
 if(isset($_POST["action"]))  
 {  
-     $_SESSION['login_state'] = false;  
-     
+     $_SESSION['login_state'] = false;
+     echo 'Logging out';
      unset($_SESSION["email"]);  
+
      unset($_POST["action"]);
 }
+
