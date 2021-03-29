@@ -29,7 +29,7 @@ session_start();
                     <a href="" class="nav-link">ABOUT US</a>
                 </li>
                 <li class="nav-item">
-                <?php echo "Loging state= ".($_SESSION['login_state']?'true':'false'); ?>
+                <?php //echo "Loging state= ".($_SESSION['login_state']?'true':'false'); ?>
                 <?php if(!$_SESSION['login_state']) : ?>
                     <li><a href="" class="nav-link" data-target="#loginModal" data-toggle="modal">LOG IN</a></li>
                 <?php else : ?>

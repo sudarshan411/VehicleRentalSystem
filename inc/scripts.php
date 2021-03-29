@@ -21,7 +21,8 @@
                         }  
                         else if(response == "Login success"){
 
-                            alert("Login success, Login state= "+"<?php echo $_SESSION['login_state']?'true':'false'; ?>");
+                            //alert("Login success, Login state= "+"<?php //echo $_SESSION['login_state']?'true':'false'; ?>");
+                            alert("Login success");
                             $('#loginModal').hide();  
                             location.reload();  
                         }
