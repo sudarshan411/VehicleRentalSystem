@@ -1,21 +1,5 @@
 <script>  
 
-    function redirectPost(url, data) {
-        var form = document.createElement('form');
-        document.body.appendChild(form);
-        form.method = 'post';
-        form.action = url;
-        for (var name in data) {
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = name;
-            input.value = data[name];
-            form.appendChild(input);
-        }
-        form.submit();
-        alert("Still here");
-    }
-
     $(document).ready(function(){  
         $("a[class$='book_now']").click(function(){
             var license = $(this).attr('id');
@@ -24,11 +8,23 @@
                 alert("Please login to rent a vehicle");
             <?php else : ?>
                 alert("Redirecting to bookings page");
-                <?php
-                    
-                ?>
+                $.ajax({
+                    url: "<?php echo ROOT_URL.'inc/book_service.php';?>",
+                    method: "POST",
+                    data : {
+                        license : license
+                    },
+                    success: function() {
+                        <?php
+                            $_SESSION['booking_request'] = true;
+                        ?>
+                        window.location.href = "<?php echo ROOT_URL.'inc/book_service.php';?>";
+                    }
+                })
+
+                //$.redirect =function (url, values, method, target);
                 
             <?php endif ?>
         }); 
-    });  
+    });
  </script> 

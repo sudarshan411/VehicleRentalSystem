@@ -28,8 +28,10 @@ if(isset($_POST['email']))
 
           if($tuples[0]['passw'] == $password){
 
+               $user = $tuples[0];
                $_SESSION['login_state'] = true;
-               $_SESSION['user_email'] = $email;
+               $_SESSION['u_id'] = $user['u_id'];
+               $_SESSION['u_type'] = $user['u_type'];
                echo 'Login success';
           }
           else{
@@ -51,7 +53,7 @@ if(isset($_POST["action"]))
 {  
      $_SESSION['login_state'] = false;
      echo 'Logging out';
-     unset($_SESSION["email"]);  
+     unset($_SESSION["u_id"]);  
 
      unset($_POST["action"]);
 }
