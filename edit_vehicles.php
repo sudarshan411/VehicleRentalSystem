@@ -5,37 +5,34 @@ require('config/db.php');
     $duplicate = false;
     
     if (isset($_GET) && !empty($_GET)){
-        $id = $_GET['id'];
+        $license = $_GET['license'];
+        $license_check = $conn->prepare("SELECT m_id FROM Vehicles WHERE license = '$license'");
+        $license_check->execute();
+        $lic_tuples = $license_check->get_result()->fetch_all($resulttype = MYSQLI_ASSOC);
+        $lic_check = count($lic_tuples) == 1;
     }
     if(isset($_POST['submit'])){
-
-        $license = mysqli_real_escape_string($conn, $_POST['license']);
-        $taken = 0;
+        
+        $license = $_POST['license'];
         $condn = $_POST['condn'];
-        $m_id = $_POST['m_id'];
+        
+        $license_check = $conn->prepare("SELECT m_id FROM Vehicles WHERE license = '$license'");
+        $license_check->execute();
+        $lic_tuples = $license_check->get_result()->fetch_all($resulttype = MYSQLI_ASSOC);
+        $lic_check = count($lic_tuples) == 1;
+        if($lic_check){
+            $m_id = $lic_tuples[0]['m_id'];
+        }
 
         $error = array();
-        if(empty($license) || $license == " "){
-            $error[] = 'You forgot to enter the vehicle type!';
-        }
+
         if(empty($condn) || $condn == " "){
             $error[] = 'You forgot to specify the condition!';
         }
 
+        if(empty($error) && $lic_check){
 
-        $cap_license = strtoupper($license);
-        $cap_condn = strtoupper($condn);
-
-        //Checking for already inserted model with same info
-        $result = $conn->prepare("SELECT * FROM Vehicles WHERE UPPER(license) = '$cap_license'");
-        $result->execute();
-        $tuples = $result->get_result()->fetch_all();
-
-        $duplicate = count($tuples) > 0;
-
-        if(!$duplicate && empty($error)){
-
-            $result = $conn->prepare("INSERT INTO Vehicles VALUES('$license', '$m_id', '$taken', '$condn')");
+            $result = $conn->prepare("UPDATE Vehicles SET condn = '$condn' WHERE license = '$license'");
             if($result->execute()){
                 header('Location: msp.php?m_id='.$m_id);
             }        
@@ -49,28 +46,22 @@ require('config/db.php');
     //Close sql connection
     mysqli_close($conn);
 ?>
-
 <?php include('inc/header.php');?>
 
 <?php $_POST['submit'] = null;?>
 
     <div class="container">
-        <h1>A New Addition to the Vehicles List</h1>
-        <?php if($duplicate): ?>
-    		<div class="alert <?php echo 'alert-danger'; ?>"><?php echo 'Vehicle already exists! Enter a new vehicle'; ?></div>
-    	<?php endif; ?>
+        <h1>Edits to the Vehicles List</h1>
         <?php if(!empty($error)): ?>
     		<div class="alert <?php echo 'alert-danger'; ?>"><?php echo 'You have not filled one or more field(s)! Please fill each field!'; ?></div>
     	<?php endif; ?>
+        <?php if(!$lic_check): ?>
+    		<div class="alert <?php echo 'alert-danger'; ?>"><?php echo 'Error with the license!'; ?></div>
+    	<?php endif; ?>
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-            <input type="hidden" name="m_id" value="<?php echo $id;?>">
-            <div class="form-group">
-                    <label for="vehi-lic">License</label>
-                    <input type="text" name="license" id="vehi-lic" class="form-control" aria-describedby="help1">
-                    <small id="help1" class="form-text text-muted">License Number of Vehicle</small> 
-            </div>
             <div class="row ">
                 <div class="col-6 form-group">
+                    <input type="hidden" name="license" value="<?php echo $license;?>">
                     <label for="vehi-condn">Condition</label>
                     <textarea name="condn" id="vehi-condn" class="form-control" aria-describedby="help2"></textarea>
                     <small id="help2" class="form-text text-muted">Condition of the Vehicle</small> 
@@ -86,4 +77,3 @@ require('config/db.php');
 
 </body>
 </html>
-
