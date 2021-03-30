@@ -6,6 +6,8 @@
 ?>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 <?php
 
@@ -41,7 +43,7 @@
     <div class="container">
         <h1>Book Vehicle</h1>
 
-        <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+        <form method="POST" name="booking_form" action="<?php echo $_SERVER['PHP_SELF'] ?>">
             <div class="form-group">
                     <label for="pikup_location">Pickup Location</label>
                     <input type="text" name="pickup_location" id="pickup_location" class="form-control" aria-describedby="help1">
@@ -60,7 +62,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="number" id= "amount" class="form-control" placeholder= 123 readonly>
+                <label for="amount-display">Total Amount</label>
+                <input type="number" id= "amount" class="form-control" placeholder= 0.00 readonly>
+                <input name="data" id= "data" type="email">
             </div>
             <div>
                 <input type = "submit" name="submit" class="btn btn-warning float-right" value="Confirm Booking">
@@ -83,6 +87,3 @@
     </div>
 
 <?php endif ?>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

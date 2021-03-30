@@ -23,18 +23,20 @@ session_start();
         <div class="collapse navbar-collapse" id="navLinks">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="" class="nav-link">CATALOGUE</a>
+                    <a href="catalogue.php" class="nav-link">CATALOGUE</a>
                 </li>
+                <?php if(isset($_SESSION['login_state']) && $_SESSION['login_state'] && isset($_SESSION['u_type'])) : { ?>
+
+                    <li class="nav-item"><a href="<?php ROOT_URL.$_SESSION['u_type'].'_dashboard.php'?>" class="nav-link" id="logout">DASHBOARD</a></li>
+                    
+                <?php } endif ?>
                 <li class="nav-item">
-                    <a href="" class="nav-link">ABOUT US</a>
-                </li>
-                <li class="nav-item">
-                <?php //echo "Loging state= ".($_SESSION['login_state']?'true':'false'); ?>
-                <?php if(!isset($_SESSION['login_state']) || !$_SESSION['login_state']) : ?>
-                    <li><a href="" class="nav-link" data-target="#loginModal" data-toggle="modal">LOG IN</a></li>
-                <?php else : ?>
-                    <li><a href="" class="nav-link" id="logout">LOG OUT</a></li>
-                <?php endif; ?>
+                    <?php //echo "Loging state= ".($_SESSION['login_state']?'true':'false'); ?>
+                    <?php if(!isset($_SESSION['login_state']) || !$_SESSION['login_state']) : ?>
+                        <li><a href="" class="nav-link" data-target="#loginModal" data-toggle="modal">LOG IN</a></li>
+                    <?php else : ?>
+                        <li><a href="" class="nav-link" id="logout">LOG OUT</a></li>
+                    <?php endif; ?>
                 </li>
             </ul>
         </div>

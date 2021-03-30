@@ -4,35 +4,39 @@
     var fadeTime = 300;
 
     /* Assign actions */
-    $("input[class$='_date']").change(function() {
-        
-        var return_date = new Date($("#return_date").val());
-        var booking_date = new Date($("#booking_date").val());
-        var days = return_date.getDay() - return_date.getDay();
-
-        var base_price = <?php echo $vehicle['base'];?>
-        var base_price = <?php echo $vehicle['rate'];?>
+    $("#booking_date").change(function() {
         
         
+        var dates= document.querySelectorAll('input[type="date"]');
+        var return_date = new Date(dates[1].valueAsDate);
+        var booking_date = dates[0].value;
+        //var days = return_date.getDay() - return_date.getDay();
 
-        var productRow = $(quantityInput).parent().parent();
-        var price = parseFloat(productRow.children('.product-price').text());
-        var quantity = $(quantityInput).val();
-        var linePrice = price * quantity;
+        var base_price = parseFloat(<?php echo $vehicle['base'];?>);
+        var rate = parseFloat(<?php echo $vehicle['rate'];?>);
 
-        /* Update totals display */
-        $('.totals-value').fadeOut(fadeTime, function() {
-            $('#cart-subtotal').html(subtotal.toFixed(2));
-            $('#cart-tax').html(tax.toFixed(2));
-            $('.cart-total').html(total.toFixed(2));
-            if (total == 0) {
-            $('.checkout').fadeOut(fadeTime);
-            } else {
-            $('.checkout').fadeIn(fadeTime);
-            }
-            $('.totals-value').fadeIn(fadeTime);
-        });
+        //var total = (days >= 1)? base_price : 0;
+        //total = total + (days > 1)? days*rate : 0;
+
+        //alert(document.getElementById("data").value);
+        
+        //var ret= document.querySelector("#return_date");
+        //var ret2= document.getElementsByName('return_date');
+        //alert(typeof dates[0].value);
+        console.dir(dates[0].valueAsDate);
+        alert(return_date.getDate());
+        //total = 2.5;
+        total = 2.5;
+        
+        $("#amount").fadeOut(fadeTime);
+        $("#amount").val(total.toFixed(2));
+        $("#amount").fadeIn(fadeTime);
+
     });
+
+    //var parts ='2014-04-03'.split('-');
+    // Please pay attention to the month (parts[1]); JavaScript counts months from 0:// January - 0, February - 1, etc.var mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
+    //console.log(mydate.toDateString());
 
     });
 </script>
