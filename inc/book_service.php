@@ -54,7 +54,7 @@
                 $stmt->execute();
                 $result = $stmt->get_result();
 
-                $book_no = $result->fetch_all($resulttype=MYSQLI_NUM)[0][0];
+                $book_no = $result->fetch_all($resulttype=MYSQLI_NUM)[0][0] + 1;
                 $license = $vehicle['license'];
                 $u_id = $_SESSION['u_id'];
                 $pickup_location = $_POST['pickup_location'];
@@ -65,7 +65,7 @@
                 $query = "INSERT INTO Bookings VALUE('$book_no', '$license', '$u_id', '$pickup_location', STR_TO_DATE('$book_date_string', '%Y-%m-%d'), STR_TO_DATE('$ret_date_string', '%Y-%m-%d'), '$amount', 0)";
                 $stmt = $conn->prepare($query);
                 if(!$stmt->execute()){
-                    $error = 'Insert tuple error.';
+                    $error = 'Insert tuple error:'.mysqli_error($conn);
                 }
                 else{
 

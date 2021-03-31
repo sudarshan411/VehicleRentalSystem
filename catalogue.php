@@ -48,7 +48,9 @@ $count = count($vehicles)
         </div>
     </div>
 
-    <?php require('inc/footer.php'); ?>
+    <?php require('inc/footer.php'); 
+    require('inc/book_scripts.php');?>
+
 
 </body>
 </html>
