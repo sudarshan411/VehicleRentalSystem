@@ -31,7 +31,7 @@ USE VehicleRentalManagement;
 	 u_id int NOT NULL,
 	 u_name varchar(50) not null,
 	 u_type varchar(50) not null,
-	 email varchar(50) unique,
+	 email varchar(50) unique not null,
      passw varchar(50),
 	 phone_number BIGINT,
 	 Address varchar(70),

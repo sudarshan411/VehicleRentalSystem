@@ -24,7 +24,7 @@
         //var ret2= document.getElementsByName('return_date');
         //alert(typeof dates[0].value);
         console.dir(dates[0].valueAsDate);
-        alert(return_date.getDate());
+        //alert(return_date.getDate());
         //total = 2.5;
         total = 2.5;
         

@@ -19,15 +19,16 @@
 </head>
 <body>
     <br>
-    <div class="container">
-        <h1>Welcome to the Vehicle Rental System</h1>
-        <p>This is a web application that allows users to rent vehicles and allows admins to access the vehicle inventory.</p>
+    <div style="background-image: url('https://bestride.com/wp-content/uploads/2015/11/Buyer%e2%80%99s-Guide-10-Steps-to-Buying-a-Used-Car.jpg');
+             background-size: cover; height:630px; padding-top: 15px; text-align: center; ">
+
+        <img src="https://c8.alamy.com/comp/KWC0MM/car-rental-blue-design-for-your-application-or-logo-with-silhouette-KWC0MM.jpg" style="height:150px; border-radius: 50%; border: 10px solid #FEDE00;">
+        <h1 style="font-size:90px; color: Yellow; margin:10px; font-family: 'Copperplate Gothic Bold', 'Copperplate Gothic Light', Copperplate, Balthazar;">Welcome To DrivePro Vehicle Rental Agency</h1>
+        <p style="font-size:27px; color: Yellow;"><em>Your One stop Destination to rent Vehicles on the go at your convenience</em></p>
+
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-    <?php include('inc/log_scripts.php'); ?>
+    <?php require('inc/footer.php');?>
 
 </body>
 </html>

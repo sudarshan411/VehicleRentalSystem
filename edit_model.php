@@ -12,6 +12,7 @@ require('config/db.php');
         $v_type = mysqli_real_escape_string($conn, $_POST['v_type']);
         $model = mysqli_real_escape_string($conn, $_POST['model']);
         $model_year = $_POST['model_year'];
+        $base = $_POST['base'];
         $rate = $_POST['rate'];
         $id = $_POST['mid'];
 
@@ -28,35 +29,42 @@ require('config/db.php');
 
         $duplicate = count($tuples) > 0;
         if(!$duplicate){
-        $result1 = $conn->prepare("UPDATE Model SET v_type = '$v_type' WHERE m_id = '$id'");
-        if($result1->execute()){
-                header('Location: admin_dashboard.php');
-        }        
-        else{
-            echo '<br>MySQLi error: '.mysqli_error($conn);
+            $result1 = $conn->prepare("UPDATE Model SET v_type = '$v_type' WHERE m_id = '$id'");
+            if($result1->execute()){
+                    header('Location: admin_dashboard.php');
+            }        
+            else{
+                echo '<br>MySQLi error: '.mysqli_error($conn);
+            }
+            $result2 = $conn->prepare("UPDATE Model SET model = '$model' WHERE m_id = '$id'");
+            if($result2->execute()){
+                    header('Location: admin_dashboard.php');
+            }        
+            else{
+                echo '<br>MySQLi error: '.mysqli_error($conn);
+            }
+            $result3 = $conn->prepare("UPDATE Model SET model_year = '$model_year' WHERE m_id = '$id'");
+            if($result3->execute()){
+                    header('Location: admin_dashboard.php');
+            }        
+            else{
+                echo '<br>MySQLi error: '.mysqli_error($conn);
+            }
+            $result4 = $conn->prepare("UPDATE Model SET rate = '$rate' WHERE m_id = '$id'");
+            if($result4->execute()){
+                    header('Location: admin_dashboard.php');
+            }        
+            else{
+                echo '<br>MySQLi error: '.mysqli_error($conn);
+            }
+            $result5 = $conn->prepare("UPDATE Model SET base = '$base' WHERE m_id = '$id'");
+            if($result5->execute()){
+                    header('Location: admin_dashboard.php');
+            }        
+            else{
+                echo '<br>MySQLi error: '.mysqli_error($conn);
+            }
         }
-        $result2 = $conn->prepare("UPDATE Model SET model = '$model' WHERE m_id = '$id'");
-        if($result2->execute()){
-                header('Location: admin_dashboard.php');
-        }        
-        else{
-            echo '<br>MySQLi error: '.mysqli_error($conn);
-        }
-        $result3 = $conn->prepare("UPDATE Model SET model_year = '$model_year' WHERE m_id = '$id'");
-        if($result3->execute()){
-                header('Location: admin_dashboard.php');
-        }        
-        else{
-            echo '<br>MySQLi error: '.mysqli_error($conn);
-        }
-        $result4 = $conn->prepare("UPDATE Model SET rate = '$rate' WHERE m_id = '$id'");
-        if($result4->execute()){
-                header('Location: admin_dashboard.php');
-        }        
-        else{
-            echo '<br>MySQLi error: '.mysqli_error($conn);
-        }
-    }
     }  
 
     //Close sql connection
@@ -91,27 +99,24 @@ require('config/db.php');
                     <small id="help3" class="form-text text-muted">Model year</small> 
                 </div>
             </div>
-            <div class="form-group">
-                <label for="vehi-rate">Rate (per day)</label>
-                <input type="number" step= "0.01" min="0" name="rate" id="vehi-rate" class="form-control" aria-describedby="help4">
-                <small id="help4" class="form-text text-muted">Rate for the vehicle</small> 
+            <div class="row ">
+                <div class="col-6 form-group">
+                    <label for="vehi-base">Base Price</label>
+                    <input type="number" step= "0.01" min="0" name="base" id="vehi-base" class="form-control" aria-describedby="help4">
+                    <small id="help4" class="form-text text-muted">Base price for the vehicle</small> 
+                </div>
+                <div class="col-6 form-group">
+                    <label for="vehi-rate">Rate (per day)</label>
+                    <input type="number" step= "0.01" min="0" name="rate" id="vehi-rate" class="form-control" aria-describedby="help4">
+                    <small id="help4" class="form-text text-muted">Rate for the vehicle</small> 
+                </div>
             </div>
             <div>
                 <input type = "submit" name="submit" class="btn btn-primary" value="submit">
             </div>
         </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-    <script>
-        $(function () {
-            $(document).scroll(function () {
-                var $nav = $("#mainNavbar");
-                $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
-            });
-        });
-    </script>
+    <?php require('inc/footer.php');?>
 </body>
 </html>
 

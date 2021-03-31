@@ -1,13 +1,17 @@
 <?php
 require('config/def.php');
 require('config/db.php');
+include('inc/header.php');
+
+if(!$_SESSION['login_state']){
+
+    header('Location: '.ROOT_URL);
+}
 
 $queryi = "SELECT * FROM Model ORDER BY m_id ";
 $result = $conn->query($queryi);
 $conn->close(); 
 ?>
-
-<?php include('inc/header.php');?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,6 +68,7 @@ $conn->close();
                 <th>Rate</th>
                 <th>Edit Model</th>
                 <th>Delete Model</th>
+                <th>Look Up Vehicles</th>
             </tr>
             
             <?php   
@@ -78,6 +83,7 @@ $conn->close();
                 <td><?php echo $rows['rate'];?></td>
                 <td> <a href="edit_model.php?mid=<?php echo $rows['m_id'];?>">Edit Model</a></td>
                 <td><a href="delete_model.php?mid=<?php echo $rows['m_id'];?>">Delete Model</a></td>
+                <td><a href="msp.php?m_id=<?php echo $rows['m_id'];?>">Look Up Vehicles</a></td>
             </tr>
            
             <?php
@@ -87,8 +93,7 @@ $conn->close();
              
         </table>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <?php require('inc/footer.php');?>
 </body>
   
 </html>

@@ -9,6 +9,7 @@ require('config/db.php');
         $v_type = mysqli_real_escape_string($conn, $_POST['v_type']);
         $model = mysqli_real_escape_string($conn, $_POST['model']);
         $model_year = $_POST['model_year'];
+        $base = $_POST['base'];
         $rate = $_POST['rate'];
 
         $error = array();
@@ -20,6 +21,9 @@ require('config/db.php');
         }
         if(empty($model_year)){
             $error[] = 'You forgot to specify the model year!';
+        }
+        if(empty($base)){
+            $error[] = 'You forgot to specify the base price!';
         }
         if(empty($rate)){
             $error[] = 'You forgot to specify the rate!';
@@ -55,7 +59,7 @@ require('config/db.php');
 
         if(!$duplicate && empty($error)){
 
-            $result = $conn->prepare("INSERT INTO Model VALUES('$m_id', '$v_type', '$model', '$model_year', 500, '$rate')");
+            $result = $conn->prepare("INSERT INTO Model VALUES('$m_id', '$v_type', '$model', '$model_year', '$base', '$rate')");
             if($result->execute()){
                 header('Location: '.ROOT_URL.'');
             }        
@@ -100,18 +104,25 @@ require('config/db.php');
                     <small id="help3" class="form-text text-muted">Model year</small> 
                 </div>
             </div>
-            <div class="form-group">
-                <label for="vehi-rate">Rate (per day)</label>
-                <input type="number" step= "0.01" min="0" name="rate" id="vehi-rate" class="form-control" aria-describedby="help4">
-                <small id="help4" class="form-text text-muted">Rate for the vehicle</small> 
+            <div class="row ">
+                <div class="col-6 form-group">
+                    <label for="vehi-base">Base Price</label>
+                    <input type="number" step= "0.01" min="0" name="base" id="vehi-base" class="form-control" aria-describedby="help4">
+                    <small id="help4" class="form-text text-muted">Base price for the vehicle</small> 
+                </div>
+                <div class="col-6 form-group">
+                    <label for="vehi-rate">Rate (per day)</label>
+                    <input type="number" step= "0.01" min="0" name="rate" id="vehi-rate" class="form-control" aria-describedby="help4">
+                    <small id="help4" class="form-text text-muted">Rate for the vehicle</small> 
+                </div>
             </div>
+            
             <div>
                 <input type = "submit" name="submit" class="btn btn-primary" value="submit">
             </div>
         </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <?php require('inc/footer.php');?>
 
 </body>
 </html>
